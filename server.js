@@ -24,7 +24,7 @@ const harvestRouter = require('./routes/harvest')
 app.use('/harvest', harvestRouter)
 
 
-app.listen(process.env.PORT, () => console.log('Server started'))
+app.listen(process.env.PORT || 80, () => console.log('Server started'))
 
 //global.mongoose = mongoose
 
