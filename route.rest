@@ -1,0 +1,47 @@
+GET http://localhost:3000/subscribers
+
+###
+GET http://localhost:3000/subscribers/5e7fd90f9438c64468c46825
+
+###
+POST http://localhost:3000/subscribers
+Content-Type: application/json
+
+{
+  "name": "Piet",
+  "subscribedToChannel": "breien"
+}
+
+###
+PATCH http://localhost:3000/subscribers/5e7fd93e9438c64468c4682a
+Content-Type: application/json
+
+{
+  "name": "Edwin111",
+  "subscribedToChannel": "webdev"
+}
+
+###
+DELETE http://localhost:3000/subscribers/5e7fd93e9438c64468c46829
+
+###
+DELETE http://localhost:3000/subscribers
+
+
+###
+GET https://api.harvestapp.com/v2/time_entries?from=20200325
+Harvest-Account-ID: 480796
+Content-Type: application/x-www-form-urlencoded
+Accept: application/json
+Authorization: Bearer 574268.pt.u6peDIyN94zI6XtVqg7xZ5JUAFSRUaKMGkx8UYxe97XDsUH8hXUBPWfnTICyePcDPb1V5pTAjb9qqcfIp556PA
+
+###
+POST http://localhost:3000/harvest/sync
+Content-Type: application/json
+
+{
+  "from": "20200101"
+}
+
+###
+GET http://localhost:3000/harvest?from=20200327&userName=Werner Bootsman&projectName=TradeXpad
