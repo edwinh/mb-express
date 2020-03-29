@@ -47,4 +47,4 @@ Content-Type: application/json
 GET http://localhost:3000/harvest?from=20200327&userName=Werner Bootsman&projectName=TradeXpad
 
 ###
-GET https://mb-express.herokuapp.com/harvest
+GET https://mb-express.herokuapp.com/harvest?from=20200329
