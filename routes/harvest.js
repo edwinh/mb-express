@@ -45,7 +45,7 @@ router.post('/sync', getTimeentries, (req, res)=>{
       taskId:           te.task.id,
       taskName:         te.task.name,
       spentDate:        te.spent_date,
-      mondayOfWeekDate: utils.mondayOfWeek(te.spent_date),
+      mondayOfWeekDate: utils.getMondayOfWeek(te.spent_date),
       hours:            te.hours,
       billable:         te.billable
     })
