@@ -41,6 +41,10 @@ const harvestSchema = new mongoose.Schema({
     type: Date,
     required: true
   },
+  mondayOfWeekDate: {
+    type: Date,
+    required: true
+  },
   hours: {
       type: Number,
       required: true

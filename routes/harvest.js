@@ -5,19 +5,16 @@ const express = require('express')
 const router = express.Router()
 const fetch = require('node-fetch')
 const Harvest = require('../models/harvest')
+const utils = require('../utils')
 
 module.exports = router
 
 router.get('/', async (req, res) => {
   let filter = {}
+  console.log(req.query)
+  
   if (req.query.from) {
-    const fromDate = new Date(
-      req.query.from.substr(0,4), 
-      req.query.from.substr(4,2)-1, 
-      req.query.from.substr(6,2)
-    )
-    console.log(fromDate)
-    filter['spentDate'] = { $gte: fromDate}
+    filter['spentDate'] = { $gte: utils.yyyymmddToDate(req.query.from)}
   }
   if (req.query.userName) {
     filter['userName'] = req.query.userName
@@ -38,18 +35,19 @@ router.post('/sync', getTimeentries, (req, res)=>{
   Harvest.collection.drop()
   res.timeEntries.map( async (te) => {
     const entry = new Harvest ({
-      timeEntryId:  te.id,
-      userId:       te.user.id,
-      userName:     te.user.name,
-      clientId:     te.client.id,
-      clientName:   te.client.name, 
-      projectId:    te.project.id,
-      projectName:  te.project.name,
-      taskId:       te.task.id,
-      taskName:     te.task.name,
-      spentDate:    te.spent_date,
-      hours:        te.hours,
-      billable:     te.billable
+      timeEntryId:      te.id,
+      userId:           te.user.id,
+      userName:         te.user.name,
+      clientId:         te.client.id,
+      clientName:       te.client.name, 
+      projectId:        te.project.id,
+      projectName:      te.project.name,
+      taskId:           te.task.id,
+      taskName:         te.task.name,
+      spentDate:        te.spent_date,
+      mondayOfWeekDate: utils.mondayOfWeek(te.spent_date),
+      hours:            te.hours,
+      billable:         te.billable
     })
     try {
       const newEntry = await entry.save()
